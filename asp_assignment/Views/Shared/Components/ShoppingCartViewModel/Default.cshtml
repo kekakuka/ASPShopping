@@ -1,0 +1,153 @@
+﻿@model asp_assignment.Models.ShoppingCartViewModels.ShoppingCartViewModel
+
+@{
+    ViewData["Title"] = "Default";
+}
+<div style="padding-left:50px" class="dropdown" id="shoppingCartMenu">
+    <a onclick="check2()" style=" margin-top:6px;margin-left:8px; border-radius:6px; " class="btn btn-default well-sm dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+
+        <span class="glyphicon glyphicon-shopping-cart"></span>Shopping Cart<span style="color:white;background-color:rgba(117, 119, 129, 0.83);" class="badge"> @Model.GetNumberOfItems()</span>
+
+    </a>
+
+
+    <div id="displayMenu" style="width:480px;height:auto;display:compact;" class="dropdown-menu dropdown-menu-left">
+
+        @if (@Model.CartItems.Count > 0)
+        {
+
+
+            <div style="border-radius:6px;" class="cart-container">
+                <h4 style="color:darkred;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-shopping-cart"></span>Shopping Cart</h4>
+                <table style="width:478px;" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th> Souvenir </th>
+                            <th> Category </th>
+                            <th> Quantity </th>
+                            <th> Price </th>
+                            <th> SubTotal </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartItems)
+                        {
+                            string cName = "";
+                            if (item.CategoryName.Length > 18)
+                            {
+                                cName = item.CategoryName.Substring(0, 14) + "...";
+                            }
+                            else
+                            {
+                                cName = item.CategoryName;
+                            }
+                            string sName = "";
+                            if (item.Souvenir.Name.Length > 18)
+                            {
+                                sName = item.Souvenir.Name.Substring(0, 14) + "...";
+                            }
+                            else
+                            {
+                                sName = item.Souvenir.Name;
+                            }
+                            <tr>
+
+                                <td>
+                                    <a asp-action="Details"  asp-route-id="@item.Souvenir.SouvenirID">
+                                        NO.@item.Souvenir.SouvenirID @sName
+                                    </a>
+                                </td>
+                                <td>@cName</td>
+
+                                <td>
+                                    @item.Count <a asp-action="RemoveFromCart" asp-controller="ShoppingCart" asp-route-id="@item.Souvenir.SouvenirID">
+                                        <span onclick="localStorage.setItem('display','inline')" class="glyphicon glyphicon-remove-circle"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    $@item.Souvenir.Price
+                                </td>
+                                @{ var quantity = item.Count;
+                                    var unitPrice = item.Souvenir.Price;
+                                    var price = quantity * unitPrice;}
+                                <td>
+                                    $@price
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                Sub Total:
+                            </td>
+                            <td>
+                                $@Model.CartTotal
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                Gst:
+                            </td>
+                            <td>
+                                $@Model.GST
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                Total:
+                            </td>
+                            <td id="grandTotal">
+                                $@Model.Total
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-offset-3">
+                        <a style="margin-bottom:4px; border-radius:8px;" class="btn-danger btn well-sm" asp-action="ClearCart" asp-controller="ShoppingCart">
+                            Clear Cart <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a style="margin-bottom:4px; border-radius:8px;" class="btn-warning btn well-sm" asp-action="Create" asp-controller="Orders">
+                            Checkout <span class="glyphicon glyphicon-credit-card"></span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+      
+
+    }
+    else
+    {
+
+       
+            <div style="border-radius:6px" class="row cart-container">
+                <h4 style="color:darkred;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-shopping-cart"></span>Shopping Cart</h4>
+
+
+
+                <div style="width:90%" class="text-center">
+
+                    <span class="glyphicon glyphicon-search">Nothing in shopping cart!!</span>
+
+                </div>
+
+            </div>
+
+       
+
+    }
+
+
+ </div>
+    </div>

@@ -1,0 +1,105 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Details";
+    ViewData.AddActivePage(ManageNavPages.Details);
+}
+
+<h4>My Details</h4>
+@Html.Partial("_StatusMessage", Model.StatusMessage)
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.FullName)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.FullName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.MobilePhoneNumber)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.MobilePhoneNumber)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Address)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Address)
+    </dd>
+
+</dl>
+<h4> Order  Details:</h4>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>
+
+                Order Number
+            </th>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Mobile Number
+            </th>
+            <th>
+                Order Date
+            </th>
+
+            <th>
+                Order Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Orders)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobilePhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+
+
+                    @Html.DisplayFor(modelItem => item.OrderStatus)
+
+                </td>
+                <td>
+
+                    <a asp-action="Purchased" asp-controller="Orders" asp-route-id="@item.OrderID">Details</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

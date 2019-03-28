@@ -1,0 +1,62 @@
+﻿@model asp_assignment.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Create";
+}
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<h3>Please Check the Order Details</h3>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+               
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FullName"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Address"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MobilePhoneNumber"></label>
+                        <input asp-for="MobilePhoneNumber" class="form-control" />
+                        <span asp-validation-for="MobilePhoneNumber" class="text-danger"></span>
+                    </div>
+                   
+            </div>
+        </div>
+        @{string money = "";
+            if (ViewData["Total"].ToString()== "Grand Total: $0")
+            {
+                money = "disabled";
+            }
+            }
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-6">
+                <label style="font-size:17px">@ViewData["Total"]</label>
+            </div>
+                <div class="col-md-offset-4 col-md-6">
+                    <button type="submit" class="btn btn-default btn-lg" @money>
+                        Place Order <span class="glyphicon glyphicon-fast-forward"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

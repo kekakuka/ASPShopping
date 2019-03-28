@@ -1,0 +1,12 @@
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\bin\Release\netcoreapp2.0\asp_assignment.deps.json
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\bin\Release\netcoreapp2.0\asp_assignment.runtimeconfig.json
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\bin\Release\netcoreapp2.0\asp_assignment.runtimeconfig.dev.json
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\bin\Release\netcoreapp2.0\asp_assignment.dll
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\bin\Release\netcoreapp2.0\asp_assignment.pdb
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\obj\Release\netcoreapp2.0\asp_assignment.csproj.CoreCompileInputs.cache
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\obj\Release\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\obj\Release\netcoreapp2.0\asp_assignment.AssemblyInfoInputs.cache
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\obj\Release\netcoreapp2.0\asp_assignment.AssemblyInfo.cs
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\obj\Release\netcoreapp2.0\asp_assignment.dll
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\obj\Release\netcoreapp2.0\asp_assignment.pdb
+C:\Users\39260\source\repos\asp_assignment\asp_assignment\obj\Release\netcoreapp2.0\asp_assignment.csprojAssemblyReference.cache

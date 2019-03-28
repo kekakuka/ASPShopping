@@ -1,0 +1,108 @@
+﻿@model asp_assignment.Models.Supplier
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Supplier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MobilePhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MobilePhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkPhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WorkPhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HomePhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HomePhoneNumber)
+        </dd>
+
+
+
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SupplierID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+@if (Model.Souvenirs.Count != 0)
+{<dt>
+        Souvenirs
+    </dt>
+    <dd>
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Souvenir Name
+                    </th>
+
+
+                    <th>
+                        Price
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Souvenirs)
+                {
+                    var imgUrl = @Href("~" + item.PathOfFile);
+                    var errImg = @Href("~/images/Default.jpg");
+                    <tr>
+
+                        <td>
+                            <img class="img-thumbnail" style="width: 60px; height:60px;" src="@imgUrl" alt="Souvenir Image" onerror="this.onerror = null; this.src = '@errImg'">
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+
+
+                    </tr>}
+
+                </tbody>
+            </table>
+        </dd>}

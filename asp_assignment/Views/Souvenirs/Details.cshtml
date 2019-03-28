@@ -1,0 +1,60 @@
+﻿@model asp_assignment.Models.Souvenir
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Souvenir</h4>
+    <hr />
+    @{var imgUrl = @Href("~" + Model.PathOfFile);
+        var errImg = @Href("~/images/Default.jpg");}
+    
+
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PathOfFile)
+        </dt>
+        <dd>
+            <img style="width: 25%;border-radius:6px;  height: auto;" src="@imgUrl" alt="Souvenir Image" onerror="this.onerror = null; this.src = '@errImg'">
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SouvenirID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

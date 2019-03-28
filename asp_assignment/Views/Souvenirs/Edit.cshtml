@@ -1,0 +1,64 @@
+﻿@model asp_assignment.Models.Souvenir
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Souvenir</h4>
+<hr />
+@{var imgUrl = @Href("~" + Model.PathOfFile);
+    var errImg = @Href("~/images/Default.jpg");}
+
+<div class="row">
+
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SouvenirID" />
+            <input type="hidden" asp-for="RowVersion" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryID"></select>
+                <span asp-validation-for="CategoryID" class="text-danger" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Supplier" class="control-label"></label>
+                <select asp-for="SupplierID" class="form-control" asp-items="ViewBag.SupplierID"></select>
+                <span asp-validation-for="SupplierID" class="text-danger" />
+            </div>
+            <input type="file" name="_files" id="_files" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <img style="width: 65%;border-radius:16px;margin-top:20px;  height: auto;" src="@imgUrl" alt="Souvenir Image" onerror="this.onerror = null; this.src = '@errImg'">
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

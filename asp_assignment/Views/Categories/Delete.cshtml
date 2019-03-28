@@ -1,0 +1,81 @@
+﻿@model asp_assignment.Models.Category
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+    <p class="text-danger">@ViewData["ErrorMessage"]</p>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CategoryID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
+@if (Model.Souvenirs.Count != 0)
+{<dt>
+        Souvenirs
+    </dt>
+    <dd>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Souvenir Name
+                    </th>
+
+
+                    <th>
+                        Price
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Souvenirs)
+                {
+                    var imgUrl = @Href("~" + item.PathOfFile);
+                    var errImg = @Href("~/images/Default.jpg");
+                    <tr>
+
+                        <td>
+                            <img class="img-thumbnail" style="width: 60px; height:60px;" src="@imgUrl" alt="Souvenir Image" onerror="this.onerror = null; this.src = '@errImg'">
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </dd>}

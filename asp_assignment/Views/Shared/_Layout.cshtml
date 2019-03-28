@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Quantity Souvenir</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    <link rel="icon" type="image/png" href="~/images/Logo.png" sizes="16x16">
+
+</head>
+<body>
+    <div style="font-size:15px" class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+        <div style="padding-top:5px;margin-left:10px" class="col-xs-3 col-lg-1 col-md-1 dropdown">
+
+            @if (User.IsInRole("Admin"))
+            {
+
+
+                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Administrator<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a asp-area="" asp-controller="Categories" asp-action="Index">Categorys Management</a></li>
+                    <li><a asp-area="" asp-controller="Suppliers" asp-action="Index">Suppliers Management</a></li>
+                    <li><a asp-area="" asp-controller="Orders" asp-action="Index">Orders Management</a></li>
+                    <li><a asp-area="" asp-controller="Souvenirs" asp-action="Index">Souvenirs Management</a></li>
+                    <li><a asp-area="" asp-controller="AdminApplicationUsers" asp-action="Index">Members Management</a></li>
+                </ul>
+
+
+            }
+
+        </div>
+
+        <div style="margin-left:5%" class="col-xs-5 col-lg-2 col-md-3 navbar-header nav-title">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+
+            <a id="LayoutLogo" asp-area="" asp-controller="Home" asp-action="Index"><img class="img-rounded" style="width:110px;" src="~/images/Title1.jpg" alt="Quality Souvenir"></a>
+
+
+        </div>
+
+        <div class="col-xs-12 col-md-9 col-lg-9    collapse navbar-collapse">
+
+            <div class="col-xs-6 col-md-3 col-lg-3  navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="MemberSouvenirs" asp-action="Index"><span id="SouvenirLogo" class="glyphicon glyphicon-fire">Souvenirs</span></a></li>
+
+                </ul>
+            </div>
+
+
+            @await Html.PartialAsync("_LoginPartial")
+
+        </div>
+
+
+
+    </div>
+
+    <partial name="_CookieConsentPartial" />
+
+    <div class="container body-content">
+
+        @RenderBody()
+        <div style="height:100px" class="row"> </div>
+
+        <hr />
+
+        <div class="container">
+
+            <footer class="footer">
+
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+
+                        <p><a asp-area="" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-home"> </span>  Home</a></p>
+
+                        <p><a asp-area="" asp-controller="Home" asp-action="About"><span class="glyphicon glyphicon-search"> </span>  About</a></p>
+
+
+
+
+                        <p><a asp-area="" asp-controller="Home" asp-action="Contact"><span class="glyphicon glyphicon-earphone"> </span> Contact</a></p>
+
+                        <p><a asp-area="" asp-controller="MemberSouvenirs" asp-action="Index"><span class="glyphicon glyphicon-gift"> </span> Souvenirs</a></p>
+
+
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+
+                        <div>
+                            <p> <span style="font-size:20px" class="glyphicon glyphicon-user"> </span>  Lei Li</p>
+                        </div>
+                        <div>
+                            <p>  <span style="font-size:20px" class="glyphicon glyphicon-info-sign"> </span>   StudentID: 1494024</p>
+                        </div>
+                        <div>
+                            <p>  <span style="font-size:20px" class="glyphicon glyphicon-heart-empty"> </span> ISCG7420 WAD</p>
+
+
+
+                        </div>
+                        <div>
+                            <p>  <span style="font-size:20px" class="glyphicon glyphicon-thumbs-up"> </span> Lecturer:Xiaosong Li</p>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <div>
+
+                            <p><span style="font-size:20px" class="glyphicon glyphicon  glyphicon-globe"> </span> Building 183, 139 Carrington Road Mt Albert, Auckland</p>
+                        </div>
+                        <div>
+
+                            <p><span style="font-size:20px" class="glyphicon glyphicon-phone-alt"></span> 0221111111</p>
+                        </div>
+                        <div>
+
+                            <p><span style="font-size:20px" class="glyphicon glyphicon-envelope"></span> support@QualitySouvenir.co.nz</p>
+                        </div>
+                        <div>
+                            <p>&copy; 2018 - Quantity Souvenir</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </footer>
+        </div>
+    </div>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+    <script>
+
+
+      
+      
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+﻿@model asp_assignment.Models.WebsiteViewModels.SouvenirInCategory
+
+@{
+    ViewData["Title"] = "Welcome to Quality Souvenir";
+}
+
+<h1 class="col-md-offset-2" style="font-size:57px;font-weight:600; font-family:'Curlz MT';text-shadow:2px 3px 0 rgba(0,0,0,0.15)"> Welcome to Quality Souvenir.</h1>
+<hr />
+<div class="container">
+    <div class="col-md-3 thumbnail">
+        <ul class="nav nav-pills nav-stacked">
+            @{string noSelectedRow = "";
+                if (ViewData["CategoryID"] == null)
+                {
+                    noSelectedRow = "active";
+                }
+            }
+            <li class="@noSelectedRow"><a asp-action="Index" asp-route-id=null>All Categories</a></li>
+            @foreach (var item in Model.Categories)
+            {
+                string selectedRow = "";
+                if (item.CategoryID == (int?)ViewData["CategoryID"])
+                {
+                    selectedRow = "active";
+                }
+                <li class=@selectedRow>
+                    <a asp-action="Index" asp-route-id="@item.CategoryID">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                </li>
+
+
+
+            }
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    <input placeholder="Search Name" class="small" type="text" name="searchName" value="@ViewData["CurrentSearchName"]" />
+
+                    <input style="margin-left:10%" placeholder="Search Min Price" class="small" type="number" name="searchMinPrice" value="@ViewData["CurrentSearchMin"]" /> - <input placeholder="Search Max Price" class="small" type="number" name="searchMaxPrice" value="@ViewData["CurrentSearchMax"]" />
+                    <input style="margin-left:5%" type="submit" value="Search" class="btn btn-default" />
+
+                </p>
+
+                <a asp-action="Index" asp-route-page="@(Model.Souvenirs.PageIndex)" asp-route-searchName=@ViewData["CurrentSearchName"] asp-route-searchMinPrice=@ViewData["CurrentSearchMin"] asp-route-searchMaxPrice=@ViewData["CurrentSearchMax"] asp-route-sortOrder="@ViewData["PriceSortOrder"]">Order by Price<span class="@ViewData["sign"]"></span> </a>   <a style="margin-left:50px" asp-action="Index">Back to Full List</a>
+            </div>
+        </form>
+        <table style="width:90%" class="table table-condensed">
+            <tr>
+                @{
+                    int cnt = 0;
+
+                    foreach (var item in Model.Souvenirs)
+                    {
+                        string sName = "";
+                        if (item.Name.Length > 25)
+                        {
+                            sName = item.Name.Substring(0, 22) + "...";
+                        }
+                        else
+                        {
+                            sName = item.Name;
+                        }
+                        var imUrl = @Href("~" + item.PathOfFile);
+                        var errImg = @Href("~/Images/Default.jpg");
+                        if (cnt++ % 3 == 0)
+                        {
+                        @:</tr><tr>
+                        }
+                        @:<td>
+                              <div style="width:95%;border-radius:8px;max-width:220px;min-width:170px;" class="thumbnail text-center">
+
+
+                                  <a asp-action="Details" asp-route-id="@item.SouvenirID">
+
+                                      <img class="img-rounded" style="width:99%;height:207px;" src="@imUrl" alt="SouvenirImage"
+                                           onerror="this.onerror = null; this.src='@errImg'" />
+
+
+                                      <span>
+                                          @sName
+                                      </span>
+                                  </a> <br />
+                                  <div class="caption row">
+                                      <div style="margin-top:3%" class="col-md-7">
+                                          <span style="font-size: 14px" class="money">
+                                              Pirce:$@Html.DisplayFor(modelItem => item.Price)
+                                          </span><br />
+                                      </div>
+                                      <div class="col-md-4">
+                                          <a class="btn btn-default" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-id="@item.SouvenirID">
+                                              <span class="glyphicon glyphicon-shopping-cart">
+                                              </span>
+                                              Cart
+                                          </a>
+                                      </div>
+                                  </div>
+                              </div>
+                        @:</td>
+                    }
+                @:</tr>
+                }
+            </table>
+        </div>
+        <hr />
+        @{
+            var prevDisabled = !Model.Souvenirs.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.Souvenirs.HasMorePage ? "disabled" : "";
+
+        }
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="col-md-1 col-md-offset-3">
+                <a asp-action="Index" asp-route-page="@(Model.Souvenirs.PageIndex-1)" asp-route-searchName=@ViewData["CurrentSearchName"] asp-route-searchMinPrice=@ViewData["CurrentSearchMin"] asp-route-searchMaxPrice=@ViewData["CurrentSearchMax"] asp-route-sortOrder="@ViewData["sign"]" class="btn btn-default @prevDisabled">Previous</a>
+            </div>
+            <div class="col-md-6 btn-group">
+
+                @for (int i = 1; i <= Model.Souvenirs.TotalPages; i++)
+                {
+                    var pageDisabled = Model.Souvenirs.PageIndex == i ? "disabled" : "";
+                    if (Model.Souvenirs.TotalPages > 15)
+                    {
+                        if ((i == 1) || (Math.Abs(i - Model.Souvenirs.PageIndex) < 5) || (i == Model.Souvenirs.TotalPages))
+                        {
+                            <a asp-action="Index" asp-route-page="@i" asp-route-searchName=@ViewData["CurrentSearchName"] asp-route-searchMinPrice=@ViewData["CurrentSearchMin"] asp-route-searchMaxPrice=@ViewData["CurrentSearchMax"] asp-route-sortOrder="@ViewData["sign"]" class="btn btn-default  @pageDisabled">@i</a>
+                        }
+                    }
+                    else
+                    {
+                        <a asp-action="Index" asp-route-page="@i" asp-route-searchName=@ViewData["CurrentSearchName"] asp-route-searchMinPrice=@ViewData["CurrentSearchMin"] asp-route-searchMaxPrice=@ViewData["CurrentSearchMax"] asp-route-sortOrder="@ViewData["sign"]" class="btn btn-default @pageDisabled">@i</a>
+                    }
+                }
+            </div>
+            <div class="col-md-1">
+                <a asp-action="Index" asp-route-page="@(Model.Souvenirs.PageIndex+1)" asp-route-searchName=@ViewData["CurrentSearchName"] asp-route-searchMinPrice=@ViewData["CurrentSearchMin"] asp-route-searchMaxPrice=@ViewData["CurrentSearchMax"] asp-route-sortOrder="@ViewData["sign"]" class="btn btn-default @nextDisabled">Next</a>
+            </div>
+        </div>
+    </div>

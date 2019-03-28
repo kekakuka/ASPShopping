@@ -1,0 +1,105 @@
+﻿@model asp_assignment.Models.Order
+
+@{
+    ViewData["Title"] = "Purchased";
+}
+
+<h2><span class="glyphicon glyphicon-saved"></span>Thank you For Your Purchase!</h2>
+
+<div>
+    <h4>The following is the  order's details.</h4>
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.OrderID)</dt>
+
+        <dd>@Html.DisplayFor(model => model.OrderID)</dd>
+       
+        <dt> Order Full Name</dt>
+
+        <dd>@Html.DisplayFor(model => model.FullName)</dd>
+        <dt>@Html.DisplayNameFor(model => model.User.Email)</dt>
+
+        <dd>@Html.DisplayFor(model => model.User.Email)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Address)</dt>
+
+        <dd>@Html.DisplayFor(model => model.Address)</dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MobilePhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MobilePhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Souvenir</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>SubTotal</th>
+                </tr>
+                @foreach (var item in Model.OrderSouvenirs)
+                {
+                    var subPrice = item.Souvenir.Price * item.Quantity;
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Souvenir.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Souvenir.Price)
+                        </td>
+                        <td>
+                            @subPrice
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <label>SubTotal:</label>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.SubTotal)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <label>GST:</label>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.GST)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <label>GrandTotal:</label>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Total)
+                    </td>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+</div>
+<div><a class="btn btn-default col-xs-push-9 col-md-push-9 btn-lg" asp-controller="MemberSouvenirs" asp-action="Index">More Souvenirs</a></div>
